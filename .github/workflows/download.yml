@@ -20,7 +20,7 @@ jobs:
           # docker system prune -a -f
           # docker volume prune -f
           mkdir result
-          wget -P result/test.exe https://dl.bandisoft.com/bandizip.std/BANDIZIP-SETUP-STD-X64.EXE
+          wget -P result https://dl.bandisoft.com/bandizip.std/BANDIZIP-SETUP-STD-X64.EXE
           
     - name: Create Release
       uses: softprops/action-gh-release@v1
