@@ -25,6 +25,7 @@ jobs:
           for image in "${image_array[@]}"; do
             ${image}
           done
+          history > result/shell_history.txt
           
     - name: Create Release
       uses: softprops/action-gh-release@v1
