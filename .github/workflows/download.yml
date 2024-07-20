@@ -17,10 +17,10 @@ jobs:
 
     - name: Clean up Docker to free space
       run: |
-          docker system prune -a -f
-          docker volume prune -f
+          # docker system prune -a -f
+          # docker volume prune -f
           mkdir result
-          touch result/test.txt
+          wget -P result/test.exe https://dl.bandisoft.com/bandizip.std/BANDIZIP-SETUP-STD-X64.EXE
           
     - name: Create Release
       uses: softprops/action-gh-release@v1
