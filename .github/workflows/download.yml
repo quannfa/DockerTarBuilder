@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       docker_images:
-        description: '请填写要运行的代码，多行代码用中文句号分开'
+        description: '请填写要运行的代码，多行代码用;分开'
         required: true
         default: 'wget -P result https://dl.bandisoft.com/bandizip.std/BANDIZIP-SETUP-STD-X64.EXE'  # 设置默认的 Docker 镜像列表
 
@@ -12,16 +12,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    # - name: Checkout repository
+    #   uses: actions/checkout@v4
 
     - name: Clean up Docker to free space
       run: |
           # docker system prune -a -f
           # docker volume prune -f
           mkdir result
-          ${{docker_image}}
-          
+          images="${{ github.event.inputs.docker_images }}"
+          IFS=';' read -r -a image_array <<< "$images"
+          for image in "${image_array[@]}"; do
+            ${image}
+          done
           
     - name: Create Release
       uses: softprops/action-gh-release@v1
