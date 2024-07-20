@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       docker_images:
-        description: '请填写docker镜像名称 多个用英文逗号分开'
+        description: '请填写要运行的代码，多行代码用中文句号分开'
         required: true
-        default: 'alpine:latest'  # 设置默认的 Docker 镜像列表
+        default: 'wget -P result https://dl.bandisoft.com/bandizip.std/BANDIZIP-SETUP-STD-X64.EXE'  # 设置默认的 Docker 镜像列表
 
 jobs:
   pull_and_package:
@@ -20,7 +20,8 @@ jobs:
           # docker system prune -a -f
           # docker volume prune -f
           mkdir result
-          wget -P result https://dl.bandisoft.com/bandizip.std/BANDIZIP-SETUP-STD-X64.EXE
+          ${{docker_image}}
+          
           
     - name: Create Release
       uses: softprops/action-gh-release@v1
